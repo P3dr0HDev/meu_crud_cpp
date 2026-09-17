@@ -1065,4 +1065,5 @@ CMakeFiles/meu_crud_cpp.dir/src/main.cpp.o: \
  /home/pedro/vcpkg/installed/x64-linux/include/nlohmann/detail/conversions/to_chars.hpp \
  /home/pedro/vcpkg/installed/x64-linux/include/nlohmann/ordered_map.hpp \
  /home/pedro/vcpkg/installed/x64-linux/include/nlohmann/detail/macro_unscope.hpp \
- /home/pedro/vcpkg/installed/x64-linux/include/nlohmann/thirdparty/hedley/hedley_undef.hpp
+ /home/pedro/vcpkg/installed/x64-linux/include/nlohmann/thirdparty/hedley/hedley_undef.hpp \
+ /home/pedro/CLionProjects/crud-api-cpp/src/models/Usuario.hpp

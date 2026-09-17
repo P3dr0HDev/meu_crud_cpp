@@ -1,8 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/meu_crud_cpp.dir/src/main.cpp.o"
   "CMakeFiles/meu_crud_cpp.dir/src/main.cpp.o.d"
-  "CMakeFiles/meu_crud_cpp.dir/src/models/Usuario.cpp.o"
-  "CMakeFiles/meu_crud_cpp.dir/src/models/Usuario.cpp.o.d"
   "meu_crud_cpp"
   "meu_crud_cpp.pdb"
 )

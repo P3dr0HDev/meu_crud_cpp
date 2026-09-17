@@ -153,30 +153,6 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/meu_crud_cpp.dir/build.make CMakeFiles/meu_crud_cpp.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/models/Usuario.o: src/models/Usuario.cpp.o
-.PHONY : src/models/Usuario.o
-
-# target to build an object file
-src/models/Usuario.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/meu_crud_cpp.dir/build.make CMakeFiles/meu_crud_cpp.dir/src/models/Usuario.cpp.o
-.PHONY : src/models/Usuario.cpp.o
-
-src/models/Usuario.i: src/models/Usuario.cpp.i
-.PHONY : src/models/Usuario.i
-
-# target to preprocess a source file
-src/models/Usuario.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/meu_crud_cpp.dir/build.make CMakeFiles/meu_crud_cpp.dir/src/models/Usuario.cpp.i
-.PHONY : src/models/Usuario.cpp.i
-
-src/models/Usuario.s: src/models/Usuario.cpp.s
-.PHONY : src/models/Usuario.s
-
-# target to generate assembly for a file
-src/models/Usuario.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/meu_crud_cpp.dir/build.make CMakeFiles/meu_crud_cpp.dir/src/models/Usuario.cpp.s
-.PHONY : src/models/Usuario.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -189,9 +165,6 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/models/Usuario.o"
-	@echo "... src/models/Usuario.i"
-	@echo "... src/models/Usuario.s"
 .PHONY : help
 
 

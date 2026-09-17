@@ -81,12 +81,12 @@ clean: CMakeFiles/meu_crud_cpp.dir/clean
 CMakeFiles/meu_crud_cpp.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/meu_crud_cpp.dir/build.make CMakeFiles/meu_crud_cpp.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/meu_crud_cpp.dir/build.make CMakeFiles/meu_crud_cpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/pedro/CLionProjects/crud-api-cpp/build/CMakeFiles --progress-num=1,2,3 "Built target meu_crud_cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/pedro/CLionProjects/crud-api-cpp/build/CMakeFiles --progress-num=1,2 "Built target meu_crud_cpp"
 .PHONY : CMakeFiles/meu_crud_cpp.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/meu_crud_cpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pedro/CLionProjects/crud-api-cpp/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pedro/CLionProjects/crud-api-cpp/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/meu_crud_cpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/pedro/CLionProjects/crud-api-cpp/build/CMakeFiles 0
 .PHONY : CMakeFiles/meu_crud_cpp.dir/rule

@@ -3,6 +3,7 @@
 
 CMakeFiles/meu_crud_cpp.dir/src/main.cpp.o
  /home/pedro/CLionProjects/crud-api-cpp/src/main.cpp
+ /home/pedro/CLionProjects/crud-api-cpp/src/models/Usuario.hpp
  /home/pedro/vcpkg/installed/x64-linux/include/asio.hpp
  /home/pedro/vcpkg/installed/x64-linux/include/asio/any_completion_executor.hpp
  /home/pedro/vcpkg/installed/x64-linux/include/asio/any_completion_handler.hpp

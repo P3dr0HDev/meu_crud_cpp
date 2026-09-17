@@ -9,7 +9,8 @@ find_package(libpqxx CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
 
 add_executable(meu_crud_cpp src/main.cpp
-        src/models/Usuario.hpp)
+        src/models/Usuario.hpp
+        src/repositories/UsuarioRepository.hpp)
 
 target_link_libraries(meu_crud_cpp PRIVATE
     Crow::Crow

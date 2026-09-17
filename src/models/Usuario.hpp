@@ -19,7 +19,7 @@ class Usuario {
     Usuario(int id, std::string nome, std::string email)
         : id(id), nome(std::move(nome)), email(std::move(email)) {}
 
-    static Usuario fromRow(const pqxx::row &row) {
+    static Usuario fromRow(const pqxx::row_ref &row) {
         return Usuario(
             row["id"].as<int>(),
             row["nome"].as<std::string>(),
