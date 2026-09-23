@@ -1,1 +1,27 @@
 .vscode/
+# Build
+build/
+cmake-build-*/
+
+# CLion
+.idea/
+
+# VSCode (já adicionado, mas reforçando)
+.vscode/
+
+# vcpkg (se você clonar o vcpkg dentro da pasta do projeto)
+vcpkg_installed/
+
+# Binários e objetos compilados
+*.o
+*.obj
+*.exe
+*.out
+*.a
+*.so
+*.dll
+
+# Logs e arquivos temporários
+*.log
+CMakeCache.txt
+CMakeFiles/
