@@ -30,7 +30,7 @@ public:
     std::optional<Usuario> findById(int id) {
         pqxx::connection conn(connString);
         pqxx::work txn(conn);
-        pqxx::result r = txn.exc_params(
+        pqxx::result r = txn.exec_params(
             "SELECT id, nome, email FROM usuarios WHERE id = $1", id
         );
 

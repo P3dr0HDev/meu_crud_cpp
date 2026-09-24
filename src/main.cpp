@@ -1,7 +1,7 @@
 #include "crow.h"
-#include <pqxx/pqxx>
 #include <nlohmann/json.hpp>
 #include "models/Usuario.hpp"
+#include "repositories/UsuarioRepository.hpp"
 
 using json = nlohmann::json;
 
@@ -10,22 +10,17 @@ const std::string CONN_STRING =
 
 int main() {
     crow::SimpleApp app;
+    UsuarioRepository repo(CONN_STRING);
 
-    // ---------- ROTA RAIZ ----------
     CROW_ROUTE(app, "/")([]() {
-        return "API C++ no ar!";
+        return "API C++ no ar!\n";
     });
 
-    // ---------- GET /usuarios (listar todos) ----------
-    CROW_ROUTE(app, "/usuarios").methods("GET"_method)([]() {
+    CROW_ROUTE(app, "/usuarios").methods("GET"_method)([&repo]() {
         try {
-            pqxx::connection conn(CONN_STRING);
-            pqxx::work txn(conn);
-            pqxx::result r = txn.exec("SELECT id, nome, email FROM usuarios ORDER BY id");
-
+            auto usuarios = repo.findAll();
             json resposta = json::array();
-            for (auto row : r) {
-                Usuario u = Usuario::fromRow(row);
+            for (const auto &u : usuarios) {
                 resposta.push_back(u.toJson());
             }
             return crow::response(200, resposta.dump());
@@ -34,41 +29,23 @@ int main() {
         }
     });
 
-    // ---------- GET /usuarios/<id> (buscar por id) ----------
-    CROW_ROUTE(app, "/usuarios/<int>").methods("GET"_method)([](int id) {
+    CROW_ROUTE(app, "/usuarios/<int>").methods("GET"_method)([&repo](int id) {
         try {
-            pqxx::connection conn(CONN_STRING);
-            pqxx::work txn(conn);
-            pqxx::result r = txn.exec_params(
-                "SELECT id, nome, email FROM usuarios WHERE id = $1", id
-            );
-
-            if (r.empty()) {
+            auto usuario = repo.findById(id);
+            if (!usuario) {
                 return crow::response(404, "Usuário não encontrado");
             }
-
-            Usuario u = Usuario::fromRow(r[0]);
-            return crow::response(200, u.toJson().dump());
+            return crow::response(200, usuario->toJson().dump());
         } catch (const std::exception &e) {
             return crow::response(500, std::string("Erro: ") + e.what());
         }
     });
 
-    // ---------- POST /usuarios (criar) ----------
-    CROW_ROUTE(app, "/usuarios").methods("POST"_method)([](const crow::request &req) {
+    CROW_ROUTE(app, "/usuarios").methods("POST"_method)([&repo](const crow::request &req) {
         try {
             Usuario u = Usuario::fromJson(json::parse(req.body));
-
-            pqxx::connection conn(CONN_STRING);
-            pqxx::work txn(conn);
-            pqxx::result r = txn.exec_params(
-                "INSERT INTO usuarios (nome, email) VALUES ($1, $2) RETURNING id",
-                u.nome, u.email
-            );
-            txn.commit();
-
-            u.id = r[0]["id"].as<int>();
-            return crow::response(201, u.toJson().dump());
+            Usuario criado = repo.save(u);
+            return crow::response(201, criado.toJson().dump());
         } catch (const json::exception &e) {
             return crow::response(400, std::string("JSON inválido: ") + e.what());
         } catch (const std::exception &e) {
@@ -76,25 +53,14 @@ int main() {
         }
     });
 
-    // ---------- PUT /usuarios/<id> (atualizar) ----------
-    CROW_ROUTE(app, "/usuarios/<int>").methods("PUT"_method)([](const crow::request &req, int id) {
+    CROW_ROUTE(app, "/usuarios/<int>").methods("PUT"_method)([&repo](const crow::request &req, int id) {
         try {
             Usuario u = Usuario::fromJson(json::parse(req.body));
-
-            pqxx::connection conn(CONN_STRING);
-            pqxx::work txn(conn);
-            pqxx::result r = txn.exec_params(
-                "UPDATE usuarios SET nome = $1, email = $2 WHERE id = $3 RETURNING id",
-                u.nome, u.email, id
-            );
-
-            if (r.empty()) {
+            auto atualizado = repo.update(id, u);
+            if (!atualizado) {
                 return crow::response(404, "Usuário não encontrado");
             }
-            txn.commit();
-
-            u.id = id;
-            return crow::response(200, u.toJson().dump());
+            return crow::response(200, atualizado->toJson().dump());
         } catch (const json::exception &e) {
             return crow::response(400, std::string("JSON inválido: ") + e.what());
         } catch (const std::exception &e) {
@@ -102,20 +68,12 @@ int main() {
         }
     });
 
-    // ---------- DELETE /usuarios/<id> (remover) ----------
-    CROW_ROUTE(app, "/usuarios/<int>").methods("DELETE"_method)([](int id) {
+    CROW_ROUTE(app, "/usuarios/<int>").methods("DELETE"_method)([&repo](int id) {
         try {
-            pqxx::connection conn(CONN_STRING);
-            pqxx::work txn(conn);
-            pqxx::result r = txn.exec_params(
-                "DELETE FROM usuarios WHERE id = $1 RETURNING id", id
-            );
-
-            if (r.empty()) {
+            bool removido = repo.remove(id);
+            if (!removido) {
                 return crow::response(404, "Usuário não encontrado");
             }
-            txn.commit();
-
             return crow::response(200, "Usuário removido com sucesso");
         } catch (const std::exception &e) {
             return crow::response(500, std::string("Erro: ") + e.what());

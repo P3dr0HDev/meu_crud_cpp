@@ -1,3 +1,0 @@
-/home/pedro/CLionProjects/crud-api-cpp/build/CMakeFiles/meu_crud_cpp.dir
-/home/pedro/CLionProjects/crud-api-cpp/build/CMakeFiles/edit_cache.dir
-/home/pedro/CLionProjects/crud-api-cpp/build/CMakeFiles/rebuild_cache.dir
